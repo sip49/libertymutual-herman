@@ -27,6 +27,7 @@ import com.amazonaws.services.ecr.model.GetAuthorizationTokenResult;
 import com.amazonaws.util.Base64;
 import com.libertymutualgroup.herman.aws.AwsExecException;
 import com.libertymutualgroup.herman.logging.HermanLogger;
+import io.github.pixee.security.SystemCommand;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -56,7 +57,7 @@ public class EcrLogin {
 
         Process p;
         try {
-            p = Runtime.getRuntime().exec(loginCommand);
+            p = SystemCommand.runCommand(Runtime.getRuntime(), loginCommand);
             p.waitFor();
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
