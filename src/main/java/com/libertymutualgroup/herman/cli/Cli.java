@@ -76,7 +76,7 @@ public class Cli implements Callable<Void> {
 
     public String getCustomConfigurationBucket() {
         String customConfigurationBucket = null;
-        if (configurationBucket != null && !configurationBucket.equals(CONFIG_BUCKET_TEMPLATE)) {
+        if (configurationBucket != null && !CONFIG_BUCKET_TEMPLATE.equals(configurationBucket)) {
             customConfigurationBucket = configurationBucket;
         }
         return customConfigurationBucket;

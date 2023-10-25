@@ -273,7 +273,7 @@ public class AuroraClient extends StandardRdsClient {
                 LOGGER.debug("DB cluster snapshot not found: " + snapshotId, ex);
                 buildLogger.addLogEntry("... Waiting for snapshot creation");
             }
-        } while (result == null || !status.equals(AVAILABLE_STATUS));
+        } while (result == null || !AVAILABLE_STATUS.equals(status));
         return result;
     }
 
