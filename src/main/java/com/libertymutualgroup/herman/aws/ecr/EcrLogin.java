@@ -27,6 +27,7 @@ import com.amazonaws.services.ecr.model.GetAuthorizationTokenResult;
 import com.amazonaws.util.Base64;
 import com.libertymutualgroup.herman.aws.AwsExecException;
 import com.libertymutualgroup.herman.logging.HermanLogger;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -63,7 +64,7 @@ public class EcrLogin {
 
             StringBuilder buf = new StringBuilder();
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 buf.append(line + "\n");
             }
             logger.addLogEntry(buf.toString());
