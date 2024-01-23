@@ -32,6 +32,7 @@ import com.libertymutualgroup.herman.task.ecs.ECSPushPropertyFactory;
 import com.libertymutualgroup.herman.task.ecs.ECSPushTaskProperties;
 import com.libertymutualgroup.herman.util.FileUtil;
 import com.libertymutualgroup.herman.util.PropertyHandlerUtil;
+import io.github.pixee.security.BoundedLineReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,7 +100,7 @@ public class ECSPushTask extends AbstractDeploymentTask {
 
         try {
             String line;
-            while ((line = rdr.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(rdr, 5_000_000)) != null) {
                 logger.addLogEntry(line);
             }
         } catch (IOException e1) {
